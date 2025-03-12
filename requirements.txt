@@ -1,3 +1,3 @@
-barcode
+python-barcode
 setuptools
 opencv-python

@@ -6,6 +6,13 @@ import numpy as np
 from PIL import Image
 import streamlit as st
 
+import streamlit as st
+import cv2
+import barcode
+from barcode.writer import ImageWriter
+from pyzbar.pyzbar import decode
+import time
+
 # Escolher o tipo de código de barras (EAN13, Code128, etc.)
 codigo = barcode.get_barcode_class('code128')
 
@@ -19,6 +26,12 @@ codigo_barras.save("codigo_barras")
 # Função de escaneamento do código de barras
 def escanear_codigo():
     cap = cv2.VideoCapture(0)
+
+    # Verifica se a câmera foi aberta corretamente
+    if not cap.isOpened():
+        st.error("Erro ao acessar a câmera! Verifique se está conectada corretamente.")
+        return
+
     st.write("📸 **Aponte o código de barras para a câmera...**")
 
     # Criar um espaço para exibir o preview
@@ -30,7 +43,7 @@ def escanear_codigo():
     while True:
         ret, frame = cap.read()
         if not ret:
-            st.error("Erro ao acessar a câmera!")
+            st.error("Erro ao capturar imagem da câmera!")
             break
 
         # Decodificar códigos de barras
@@ -46,8 +59,9 @@ def escanear_codigo():
         if codigo_detectado:
             break
 
-    cap.release()
-    cv2.destroyAllWindows()
+        time.sleep(0.1)  # Pequeno delay para evitar uso excessivo de CPU
+
+    cap.release()  # Liberar a câmera
 
     # Apagar o preview e exibir apenas o código detectado
     placeholder.empty()
@@ -57,22 +71,15 @@ def escanear_codigo():
     else:
         st.warning("Escaneamento cancelado ou sem código detectado!")
 
+
 # Interface do Streamlit
 st.title("📷 Leitor de Código de Barras com Streamlit")
 
 # Exibe o botão "Escanear Código"
 escanear_button = st.button("📌 Escanear Código")
 
-# Mostrar o botão "Cancelar" apenas depois de o botão "Escanear Código" ser pressionado
 if escanear_button:
-    cancel_button = st.button("❌ Cancelar")
-
-    # Inicia o processo de escaneamento
     escanear_codigo()
-
-    # Se o botão Cancelar for pressionado, exibe a mensagem de cancelamento
-    if cancel_button:
-        st.warning("Escaneamento cancelado!")  # Informa que o escaneamento foi cancelado
 
 
 

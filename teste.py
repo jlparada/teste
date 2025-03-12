@@ -5,12 +5,6 @@ from pyzbar.pyzbar import decode
 import numpy as np
 from PIL import Image
 import streamlit as st
-
-import streamlit as st
-import cv2
-import barcode
-from barcode.writer import ImageWriter
-from pyzbar.pyzbar import decode
 import time
 
 # Escolher o tipo de código de barras (EAN13, Code128, etc.)

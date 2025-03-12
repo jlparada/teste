@@ -1,4 +1,0 @@
-barcode
-pyzbar
-PIL
-streamlit

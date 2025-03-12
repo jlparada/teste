@@ -2,3 +2,4 @@ python-barcode
 setuptools
 opencv-python-headless
 pyzbar
+libzbar0

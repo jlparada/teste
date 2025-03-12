@@ -1,4 +1,5 @@
 python-barcode
 setuptools
 opencv-python-headless
-pillow
+pyzbar
+Pillow

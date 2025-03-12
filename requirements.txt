@@ -1,3 +1,2 @@
-barcode
-streamlit
-barcode-writer
+
+

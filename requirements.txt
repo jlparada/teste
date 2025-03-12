@@ -1,3 +1,3 @@
 barcode
 streamlit
-cv2
+barcode.writer

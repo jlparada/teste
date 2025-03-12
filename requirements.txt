@@ -1,5 +1,4 @@
 barcode
-opencv
 pyzbar
 PIL
 streamlit
